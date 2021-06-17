@@ -1,7 +1,7 @@
 <p align="center">
-<img src="media/blackberrypi.jpg" />
-    <h1 align="center" >BadBerry</h1>
-    <p align="center"> ❤ Wifi DOS attack within BlackBerryPi</p>
+<img src="media/badberry.jpg" />
+    <h1 align="center" >BadBerryPi</h1>
+    <p align="center"> ❤ Wifi DOS attack within Raspberry Pi zero W</p>
         <p align="center">
     <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.8-green.svg"></a>
     <a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>

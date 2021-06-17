@@ -1,6 +1,6 @@
 <p align="center">
-<img src="media/blackberrypi.jpg" />
-    <h1 align="center" >BadBerry</h1>
+<img src="media/badberry.jpg" />
+    <h1 align="center" >BadBerryPi</h1>
     <p align="center"> ❤ 使用树莓派来发起wifi断网攻击</p>
         <p align="center">
     <a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.8-green.svg"></a>
