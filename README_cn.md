@@ -8,17 +8,25 @@
     <a target="_blank" href="Scapy" title="Scapy"><img src="https://img.shields.io/badge/power_by-Scapy-Green.svg"></a></p>
 </p>
 
+> 目前测试阶段，不建议使用
+
 ## 依赖
 
 编写中...
 
-## 安装 & 使用
+## 使用
 
-编写中...
+```bash
+git clone git@github.com:s045pd/BadBerryPi.git
+
+pip install -r requirements.txt
+
+python -m badberrypi
+```
 
 ## TODO
 
-编写中...
+- 完成初版
 
 ## 📝 License
 

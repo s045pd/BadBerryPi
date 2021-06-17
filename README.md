@@ -8,19 +8,27 @@
     <a target="_blank" href="Scapy" title="Scapy"><img src="https://img.shields.io/badge/power_by-Scapy-Green.svg"></a></p>
 </p>
 
+> DEV now, not recommended to use
+
 > 中文文档 [README_cn.md](README_cn.md)
 
 ## Requirement
 
 writing...
 
-## Install & Useage
+## Useage
 
-writing...
+```bash
+git clone git@github.com:s045pd/BadBerryPi.git
+
+pip install -r requirements.txt
+
+python -m badberrypi
+```
 
 ## TODO
 
-writing...
+- finish it
 
 ## 📝 License
 
