@@ -7,33 +7,33 @@ And it can also run on linux and mac
 by S045pd
 https://community.cisco.com/t5/wireless-mobility-documents/802-11-sniffer-capture-analysis-management-frames-and-open-auth/ta-p/3120622
 """
+import argparse
 import asyncio
 import re
-import argparse
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from platform import system
 from itertools import chain
+from platform import system
 from typing import Tuple
-import argparse
-
 
 import psutil
 from scapy.all import *
 
+from badberrypi.common import AP, STA, run_code
 from badberrypi.log import *
-from badberrypi.common import run_code, AP, STA
 
 __version__ = "1.0.0"
 
 
-
-parser = argparse.ArgumentParser(description='BadBerryPi')
-parser.add_argument('-d',default="__all__",metavar='[mac-address]',help="default deny all")
-parser.add_argument('-a',default=None,metavar='[mac-address]',help="default allow yours")
+parser = argparse.ArgumentParser(description="BadBerryPi")
+parser.add_argument(
+    "-d", default="__all__", metavar="[mac-address]", help="default deny all"
+)
+parser.add_argument(
+    "-a", default=None, metavar="[mac-address]", help="default allow yours"
+)
 # parser.add_argument('-f',default=,metavar='[mac-address]',help="default allow yours")
 args = parser.parse_args()
-
 
 
 @dataclass
@@ -75,7 +75,12 @@ class worker:
             self.allow_addrs = self.allow_addrs.union(
                 filter(
                     lambda _: re.match(r"([0-9a-z\:]{2}){5}[0-9a-z]", _),
-                    chain(*[[item.address for item in groups] for groups in psutil.net_if_addrs().values()]),
+                    chain(
+                        *[
+                            [item.address for item in groups]
+                            for groups in psutil.net_if_addrs().values()
+                        ]
+                    ),
                 )
             )
 
@@ -147,7 +152,7 @@ class worker:
         {'Dot11EltERP', 'Dot11EltHTCapabilities', 'Dot11FCS', 'Dot11EltCountryConstraintTriplet', 'Dot11Ack', 'Dot11EltVendorSpecific', 'Dot11ReassoResp', 'Dot11EltDSSSet', 'Dot11CCMP', 'Dot11Disas', 'Dot11ReassoReq', 'Dot11WEP', 'Dot11PacketList', 'Dot11EltCountry', 'Dot11Beacon', 'Dot11ATIM', 'Dot11Auth', 'Dot11ProbeReq', 'Dot11', 'Dot11Encrypted', 'Dot11TKIP', 'Dot11EltRSN', 'Dot11EltRates', 'Dot11QoS', 'Dot11ProbeResp', 'Dot11EltMicrosoftWPA', 'Dot11AssoReq', 'Dot11AssoResp', 'Dot11Deauth', 'Dot11Elt'}
         """
         dst, src = pkt.getlayer(Dot11).addr1, pkt.getlayer(Dot11).addr2
-        debug(dst, src)
+        debug(dst, src, pkt, debug=False)
         if pkt.haslayer(Dot11Beacon):
             bssid = bytes.decode(pkt.getlayer(Dot11Elt).info)
             if src not in self.ap_addrs:
@@ -214,7 +219,7 @@ class worker:
 
 def main():
     try:
-        asyncio.run(worker().run())
+        asyncio.run(worker(deny_addrs={"60:6d:3c:82:49:59", "24:f6:77:0f:e8:58"}).run())
     except PermissionError:
         end("use sudo!")
     except KeyboardInterrupt:

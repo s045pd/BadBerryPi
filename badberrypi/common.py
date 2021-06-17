@@ -1,6 +1,7 @@
-from subprocess import PIPE, Popen, DEVNULL
-from badberrypi.log import info
 from dataclasses import dataclass, field
+from subprocess import DEVNULL, PIPE, Popen
+
+from badberrypi.log import info
 
 
 def run_code(code: str, sync: bool = True) -> str:
